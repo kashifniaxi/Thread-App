@@ -1,6 +1,8 @@
+import "dotenv/config";
 import express from "express";
 import { expressMiddleware } from "@as-integrations/express5";
 import createGraphqlServer  from "./graphql/index.js";
+
 
 
 async function startServer() {

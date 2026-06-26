@@ -1,1 +1,4 @@
-export const Queries = `gql`;
+export const Queries = `
+    getUserToken(email: String!, password: String!): String
+`;
+
