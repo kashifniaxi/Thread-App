@@ -10,6 +10,7 @@ function getSecretKey() {
     return secretKey
 }
 
+
 export interface createUserPayload{
 
     firstName: string,
@@ -24,6 +25,9 @@ export interface getUserTokenPayload{
 }
 
 class userService{
+    public static getUserById(id:string){
+        return prismaClient.user.findUnique({where: {id}})
+    }
     private static hashedPassword(salt:string, password: string){
         const hashedPassword = createHmac("sha256", salt).update(password).digest("hex");
         return hashedPassword
@@ -43,6 +47,10 @@ class userService{
 
         return token;
 
+    }
+
+    public static decodeUserToken(token: string){
+        return JWT.verify(token, getSecretKey())
     }
 
     public static createuser(payload:createUserPayload){
